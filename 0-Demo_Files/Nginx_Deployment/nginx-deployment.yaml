@@ -61,6 +61,7 @@ spec:
           kind: PersistentVolumeClaim
           metadata:
             name: nginx-pvc
+            namespace: nginx-demo
           spec:
             resources:
               requests:
