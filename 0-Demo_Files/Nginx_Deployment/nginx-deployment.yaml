@@ -18,7 +18,7 @@ spec:
   storageClassName: efs-sc
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-08142a33129fd0a5a
+    volumeHandle: fs-09be0dcb6f5f04788
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -32,7 +32,7 @@ spec:
     requests:
       storage: 1Gi
 ---
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
   name: nginx-deploy
@@ -41,9 +41,6 @@ metadata:
     app: web
 spec:
   replicas: 3 
-  selector:
-    matchLabels:
-      app: web
   template:
     metadata:
       labels:
