@@ -59,7 +59,7 @@ spec:
         - name: www
           mountPath: /usr/share/nginx/html
       volumes:
-        - name: efs-storage
+        - name: www
           apiVersion: v1
           kind: PersistentVolumeClaim
           metadata:
