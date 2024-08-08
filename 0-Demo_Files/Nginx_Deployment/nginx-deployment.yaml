@@ -18,7 +18,7 @@ spec:
   storageClassName: efs-sc
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-09be0dcb6f5f04788
+    volumeHandle: fs-0fbcd037f15c1b10b
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -56,7 +56,7 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: web
+        - name: www
           mountPath: /usr/share/nginx/html
       volumes:
         - name: efs-storage
