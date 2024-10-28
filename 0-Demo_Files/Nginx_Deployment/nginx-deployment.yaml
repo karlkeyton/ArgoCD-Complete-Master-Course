@@ -11,6 +11,8 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/usr/share/nginx/html"
   storageClassName: efs-sc
   csi:
     driver: efs.csi.aws.com
@@ -51,25 +53,15 @@ spec:
       - name: web
         image: nginx:1.14.2
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         volumeMounts:
         - name: www
-          #mountPath: /usr/share/nginx/html
-          mountPath: /var/www/nginx-default
+          mountPath: /usr/share/nginx/html
       volumes:
         - name: www
           apiVersion: v1
-          kind: PersistentVolumeClaim
-          metadata:
-            name: nginx-pvc
-            namespace: nginx-demo
-          spec:
-            resources:
-              requests:
-                storage: 1Gi
-            volumeMode: Filesystem
-            accessModes:
-              - ReadWriteMany
+          PersistentVolumeClaim:
+            claimName: nginx-pvc
 ---
 apiVersion: v1
 kind: Service
