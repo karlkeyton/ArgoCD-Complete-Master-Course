@@ -54,7 +54,8 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: www
-          mountPath: /usr/share/nginx/html
+          #mountPath: /usr/share/nginx/html
+          mountPath: /var/www/nginx-default
       volumes:
         - name: www
           apiVersion: v1
