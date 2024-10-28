@@ -40,7 +40,7 @@ spec:
   selector:
     matchLabels:
       app: web
-  replicas: 3
+  replicas: 5
   template:
     metadata:
       labels:
