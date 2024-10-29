@@ -83,10 +83,10 @@ metadata:
   name: nginx-deploy
   namespace: nginx-demo
   labels:
-    name: nginx-deploy
+    name: web
 spec:
   containers:
-  - name: nginx-demo
+  - name: web
     image: nginx:latest
     volumeMounts:
     - mountPath: "/var/log/nginx"
