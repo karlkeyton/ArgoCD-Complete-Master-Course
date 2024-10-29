@@ -76,7 +76,7 @@ spec:
       - mountPath: "/var/log/nginx"
         name: www
     volumes:
-    - name: www
+    - name: nginx-pvc
       kind: PersistentVolumeClaim
 ---
 apiVersion: v1
