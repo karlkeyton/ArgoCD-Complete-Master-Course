@@ -66,6 +66,21 @@ spec:
         - name: www
           PersistentVolumeClaim:
             claimName: nginx-pvc
+  containers:
+  - image: nginx:latest
+    name: web
+    ports:
+    - containerPort: 8080
+    volumeMounts:
+    - mountPath: "/var/log/nginx"
+      name: www
+    volumes:
+    - name: www
+      kind: PersistentVolumeClaim
+      metadata:
+        name: nginx-pvc
+      PersistentVolumeClaim:
+        claimName: nginx-pvc
 ---
 apiVersion: v1
 kind: Pod
