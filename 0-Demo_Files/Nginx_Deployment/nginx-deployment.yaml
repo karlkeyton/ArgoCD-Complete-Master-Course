@@ -52,24 +52,24 @@ metadata:
   name: nginx-deploy
   namespace: nginx-demo
   labels:
-    app: web
+    app: nginx
 spec:
   selector:
     matchLabels:
-      app: web
+      app: nginx
   replicas: 5
   template:
     metadata:
       labels:
-        app: web
+        app: nginx
       volumes:
         - name: www
           PersistentVolumeClaim:
             claimName: nginx-pvc
   spec:
     containers:
-    - image: nginx:latest
-      name: web
+    - name: nginx
+      image: nginx:latest
       ports:
       - containerPort: 8080
       volumeMounts:
@@ -85,10 +85,10 @@ metadata:
   name: nginx-deploy
   namespace: nginx-demo
   labels:
-    name: web
+    name: nginx
 spec:
   containers:
-  - name: web
+  - name: nginx
     image: nginx:latest
     volumeMounts:
     - mountPath: "/var/log/nginx"
@@ -112,7 +112,7 @@ metadata:
   namespace: nginx-demo
 spec:
   selector:
-    app: web
+    app: nginx
   ports:
     - protocol: TCP
       port: 80
