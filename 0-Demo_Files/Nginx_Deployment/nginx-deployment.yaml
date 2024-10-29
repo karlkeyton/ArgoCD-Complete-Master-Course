@@ -47,37 +47,28 @@ spec:
       storage: 1Gi
 ---
 apiVersion: apps/v1
+kind: apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deploy
-  namespace: nginx-demo
-  labels:
-    app: nginx
+  name: nginx
 spec:
+  replicas: 5
   selector:
     matchLabels:
       app: nginx
-  replicas: 5
   template:
     metadata:
       labels:
         app: nginx
-      volumes:
-        - name: www
-          PersistentVolumeClaim:
-            claimName: nginx-pvc
-  spec:
-    containers:
-    - name: nginx
-      image: nginx:latest
-      ports:
-      - containerPort: 8080
-      volumeMounts:
-      - mountPath: "/var/log/nginx"
-        name: www
-    volumes:
-    - name: nginx-pvc
-      kind: PersistentVolumeClaim
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        resources:
+          limits:
+            memory: "128Mi"
+        ports:
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Pod
