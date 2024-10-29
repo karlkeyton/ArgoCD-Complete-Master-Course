@@ -80,9 +80,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-demo
+  name: nginx-deploy
+  namespace: nginx-demo
   labels:
-    name: nginx-demop
+    name: nginx-deploy
 spec:
   containers:
   - name: nginx-demo
