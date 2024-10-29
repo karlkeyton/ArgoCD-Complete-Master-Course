@@ -18,6 +18,8 @@ metadata:
   finalizers:
   - kubernetes.io/pv-protection
   name: nginx-pv
+  labels:
+    type: local
 spec:
   accessModes:
   - ReadWriteMany
@@ -29,8 +31,8 @@ spec:
     name: nginx-pvc
     namespace: nginx-demo
   hostPath:
-    path: /tmp/hostpath-provisioner/nginx-demo/nginx-pvc
-  persistentVolumeReclaimPolicy: Delete
+    path: "/var/log/nginx"
+  persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   volumeMode: Filesystem
 ---
@@ -49,7 +51,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-web
 spec:
   replicas: 5
   selector:
