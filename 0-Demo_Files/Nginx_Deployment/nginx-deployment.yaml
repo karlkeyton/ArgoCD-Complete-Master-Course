@@ -62,6 +62,10 @@ spec:
     metadata:
       labels:
         app: web
+      volumes:
+        - name: www
+          PersistentVolumeClaim:
+            claimName: nginx-pvc
 ---
 apiVersion: v1
 kind: Pod
@@ -76,7 +80,7 @@ spec:
     image: nginx:latest
     volumeMounts:
     - mountPath: "/var/log/nginx"
-      name: nginx-vol
+      name: www
     resources:
       limits:
         memory: "128Mi"
