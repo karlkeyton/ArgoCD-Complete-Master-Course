@@ -2,8 +2,8 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  namespace:
-  name: standard
+  namespace: nginx-demo
+  name: nginx-sc
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "true"
   labels:
@@ -70,13 +70,37 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: www
-          mountPath: /usr/share/nginx/html
+        - mountPath: "/var/log/nginx/"
+          name: www
       volumes:
         - name: www
-          apiVersion: v1
           PersistentVolumeClaim:
             claimName: nginx-pvc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-demo
+  labels:
+    name: nginx-demop
+spec:
+  containers:
+  - name: nginx-demo
+    image: nginx:latest
+    volumeMounts:
+    - mountPath: "/var/log/nginx"
+      name: nginx-vol
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
+  volumes:
+    - name: www
+      apiVersion: v1
+      PersistentVolumeClaim:
+        claimName: nginx-pvc
 ---
 apiVersion: v1
 kind: Service
